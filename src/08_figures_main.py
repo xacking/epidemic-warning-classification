@@ -35,7 +35,6 @@ def cm_panel(ax, counts, title, total_note):
     ax.set_xticks([0,1]); ax.set_xticklabels(["Predicted\nnon-warning","Predicted\nwarning"],fontsize=7.2)
     ax.set_yticks([0,1]); ax.set_yticklabels(["True\nnon-warning","True\nwarning"],fontsize=7.2)
     ax.set_title(title,fontsize=8,pad=6,color=INK)
-    ax.text(.5,-.34,total_note,transform=ax.transAxes,ha="center",fontsize=6.8,color=MUTED)
     for s in ax.spines.values(): s.set_color(MUTED)
     ax.tick_params(length=0, colors=MUTED, labelcolor=INK)
 
@@ -49,8 +48,6 @@ for ax,(k,t) in zip(axes,sel):
     a=np.array(cms[k]).sum(0)/2.0
     m=S[S.model==k]
     cm_panel(ax,a,t,f"sensitivity {m.sensitivity.mean():.3f}   precision {m.precision.mean():.3f}   F1 {m.f1.mean():.3f}")
-fig.suptitle("Social media task — pooled over 10 cross-validation folds (counts per pass over the 8,395-tweet corpus)",
-             fontsize=8,color=INK,y=1.04)
 plt.tight_layout(); plt.savefig("results/figures/fig_social_cm.png",bbox_inches="tight",facecolor="white"); plt.close()
 
 # ---------- social model comparison: dot plot, mean +- sd ----------
@@ -82,8 +79,6 @@ for ax in axes:
     ax.axhline(0.5,color=MUTED,lw=.7,ls=(0,(1,2)))
 fig.text(0.005,0.545,"as published",fontsize=6.6,color=MUTED,style="italic",rotation=90,va="center")
 fig.text(0.005,0.255,"revised",fontsize=6.6,color=MUTED,style="italic",rotation=90,va="center")
-fig.suptitle("Social media task — mean ± SD over 10 folds (5-fold stratified CV × 2 repeats)",
-             fontsize=8,color=INK,y=1.03)
 plt.tight_layout(); plt.savefig("results/figures/fig_social_compare.png",bbox_inches="tight",facecolor="white"); plt.close()
 
 # ---------- vocabulary sweep ----------
@@ -103,7 +98,6 @@ ax.set_xlabel("Tokenizer vocabulary size (log scale)",fontsize=8,color=INK)
 ax.set_ylabel("Score",fontsize=8,color=INK)
 ax.set_xlim(85,9000); ax.grid(color=GRID,lw=.5,zorder=0); ax.set_axisbelow(True); despine(ax)
 ax.legend(frameon=False,fontsize=7,loc="lower right")
-ax.set_title("Effect of the vocabulary cap on the proposed model",fontsize=8,color=INK,pad=6)
 plt.tight_layout(); plt.savefig("results/figures/fig_vocab_sweep.png",bbox_inches="tight",facecolor="white"); plt.close()
 print("social figures written",flush=True)
 
@@ -126,8 +120,6 @@ for ax,(k,t) in zip(axes,csel):
     cm_panel(ax,a,t,f"sensitivity {m.sensitivity.mean():.3f}   AUROC {m.auroc.mean():.3f}")
     ax.set_xticklabels(["Predicted\nnegative","Predicted\npositive"],fontsize=7.2)
     ax.set_yticklabels(["True\nnegative","True\npositive"],fontsize=7.2)
-fig.suptitle("Clinical task, complete-case cohort (n = 598, 81 positive) — pooled over 10 folds",
-             fontsize=8,color=INK,y=1.04)
 plt.tight_layout(); plt.savefig("results/figures/fig_clinical_cm.png",bbox_inches="tight",facecolor="white"); plt.close()
 
 fig,axes=plt.subplots(1,3,figsize=(7.2,2.4),sharey=True)
@@ -140,8 +132,6 @@ for ax,(key,lab,col) in zip(axes,[("auroc","AUROC",BLUE),("sensitivity","Sensiti
     ax.set_xlabel(lab,fontsize=8,color=INK); ax.grid(axis="x",color=GRID,lw=.5,zorder=0)
     ax.set_axisbelow(True); despine(ax,("left",))
 axes[0].set_yticks(yy); axes[0].set_yticklabels(cshort,fontsize=7.2)
-fig.suptitle("Clinical task — mean ± SD over 10 folds; the SD bands overlap for every pair (no significant difference)",
-             fontsize=8,color=INK,y=1.05)
 plt.tight_layout(); plt.savefig("results/figures/fig_clinical_compare.png",bbox_inches="tight",facecolor="white"); plt.close()
 
 print("clinical figures written",flush=True)

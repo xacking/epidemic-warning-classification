@@ -57,7 +57,7 @@ print("share of mean|SHAP| in the raw-clinical block: %.3f"%share_raw,flush=True
 
 names=[k.replace("\xa0"," ").strip() for k in keep]
 shap.summary_plot(raw_block, B, feature_names=names, show=False, max_display=18, plot_size=(6.4,4.6))
-f=plt.gcf(); f.axes[0].set_title("SHAP summary, clinical variables (positive class)",fontsize=8.5,pad=8)
+f=plt.gcf()
 for a in f.axes: a.tick_params(labelsize=7.2); a.set_xlabel(a.get_xlabel(),fontsize=8)
 f.savefig("results/figures/fig_shap_beeswarm.png",bbox_inches="tight",facecolor="white",dpi=400); plt.close(f)
 
@@ -70,7 +70,6 @@ ax.set_yticks(range(len(_v))); ax.set_yticklabels(_n,fontsize=7)
 for i,v in enumerate(_v):
     if v>0.0009: ax.text(v+_v.max()*.015,i,f"{v:.4f}",va="center",fontsize=6.4,color="#1a1a1a")
 ax.set_xlabel("mean |SHAP value|",fontsize=8,color="#1a1a1a")
-ax.set_title("Mean absolute SHAP value per clinical variable",fontsize=8.5,pad=6,color="#1a1a1a")
 ax.grid(axis="x",color="#d8d8d8",lw=.5); ax.set_axisbelow(True)
 for sp in ("top","right"): ax.spines[sp].set_visible(False)
 for sp in ("left","bottom"): ax.spines[sp].set_color("#5c5c5c")

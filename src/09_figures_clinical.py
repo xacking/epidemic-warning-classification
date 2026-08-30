@@ -38,7 +38,6 @@ ax.set_ylabel("Sensitivity",fontsize=8,color=INK)
 ax.set_xlim(-.02,1.02); ax.set_ylim(-.02,1.02)
 ax.grid(color=GRID,lw=.5,zorder=0); ax.set_axisbelow(True); despine(ax)
 ax.legend(frameon=False,fontsize=6.9,loc="lower right")
-ax.set_title("Where the model actually operates",fontsize=8.5,color=INK,pad=6)
 
 ax=axes[1]
 labs=["Threshold 0.5\n(as reported)","80% specificity","90% specificity"]
@@ -52,9 +51,6 @@ ax.set_yticks([0,1,2]); ax.set_yticklabels(labs,fontsize=7.4)
 ax.set_xlabel("Positive-class sensitivity",fontsize=8,color=INK)
 ax.set_xlim(0,1.12); ax.grid(axis="x",color=GRID,lw=.5,zorder=0); ax.set_axisbelow(True)
 despine(ax,("left",))
-ax.set_title("Same model, three operating points",fontsize=8.5,color=INK,pad=6)
-fig.suptitle("Clinical task: the decision threshold, not the architecture, governs what the model detects",
-             fontsize=8.2,color=INK,y=1.02)
 plt.tight_layout(); plt.savefig("results/figures/fig_operating_point.png",bbox_inches="tight",facecolor="white"); plt.close()
 
 # ---------- 2. cohort spectrum ----------
@@ -73,7 +69,5 @@ ax.set_xscale("log"); ax.set_xlabel("Records available at that completeness thre
 ax.set_ylabel("AUROC",fontsize=8,color=INK)
 ax.set_ylim(.45,1.0); ax.set_xlim(170,11000)
 ax.grid(color=GRID,lw=.5,zorder=0); ax.set_axisbelow(True); despine(ax)
-ax.set_title("No middle ground: many features and few patients,\nor many patients and four features",
-             fontsize=8,color=INK,pad=6)
 plt.tight_layout(); plt.savefig("results/figures/fig_cohort_spectrum.png",bbox_inches="tight",facecolor="white"); plt.close()
 print("written")
