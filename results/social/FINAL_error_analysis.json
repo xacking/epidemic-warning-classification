@@ -1,0 +1,13 @@
+{
+ "n_test": 1679,
+ "n_pos": 258,
+ "FN": 18,
+ "FP": 6,
+ "TP": 240,
+ "fn_neutral_pct": 50.0,
+ "fn_single_kw_pct": 100.0,
+ "fn_mean_tokens": 8.9,
+ "tp_mean_tokens": 11.1,
+ "fn_negation_pct": 16.7,
+ "all_pos_neutral_pct": 50.3
+}

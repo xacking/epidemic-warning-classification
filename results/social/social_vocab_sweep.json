@@ -1,0 +1,26 @@
+[
+ {
+  "vocab": 100,
+  "sensitivity": 0.765,
+  "precision": 0.933,
+  "f1": 0.84,
+  "auroc": 0.942,
+  "ap": 0.88
+ },
+ {
+  "vocab": 1000,
+  "sensitivity": 0.875,
+  "precision": 0.943,
+  "f1": 0.908,
+  "auroc": 0.966,
+  "ap": 0.938
+ },
+ {
+  "vocab": 5000,
+  "sensitivity": 0.91,
+  "precision": 0.972,
+  "f1": 0.94,
+  "auroc": 0.985,
+  "ap": 0.968
+ }
+]

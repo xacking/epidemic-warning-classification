@@ -1,0 +1,19 @@
+feature,mean_abs_shap
+Leukocytes,0.03343659619822327
+Platelets,0.013001026193274423
+Eosinophils,0.004750483481163511
+Monocytes,0.004645760511881645
+Mean platelet volume,0.003573220022870113
+Patient age quantile,0.0029135683303111786
+Mean corpuscular volume (MCV),0.0024167658391417916
+Lymphocytes,0.0023444513300389033
+Mean corpuscular hemoglobin concentration (MCHC),0.002232614254229421
+Red blood Cells,0.0020589536878221452
+Hematocrit,0.0018599771603197473
+Mean corpuscular hemoglobin (MCH),0.001438606208314956
+Red blood cell distribution width (RDW),0.001418422647140337
+Hemoglobin,0.0011319568766851539
+Basophils,0.0010319001968577368
+"Patient addmited to intensive care unit (1=yes, 0=no)",0.0001111322745741261
+"Patient addmited to regular ward (1=yes, 0=no)",5.9338068872785804e-05
+"Patient addmited to semi-intensive unit (1=yes, 0=no)",3.712109441105532e-05
