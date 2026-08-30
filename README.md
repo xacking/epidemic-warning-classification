@@ -12,7 +12,7 @@ Forest classifier, applied under one architectural template to two independent
 tasks:
 
 - **Social media** — labelling Ebola-related tweets as symptom-bearing warning
-  signals, using the 2023 Ugandan-outbreak corpus of Mirugwe *et al.*
+  signals, using the 2023 Ugandan-outbreak tweet dataset of Mirugwe *et al.*
 - **Clinical** — labelling structured COVID-19 patient records as positive or
   negative for SARS-CoV-2, from routine complete-blood-count variables.
 
@@ -112,35 +112,71 @@ data/       access instructions only - no raw data (see data/README.md)
 
 | Script | Produces |
 |---|---|
-| `01_preprocess.py` | cleaned corpora: `social_prepped.csv`, `clinical_X.csv`, `clinical_y.npy` |
-| `02_social_experiments.py` | `results/social/FINAL_social_*` |
+| `01_preprocess.py` | cleaned datasets: `social_prepped.csv`, `clinical_X.csv`, `clinical_y.npy` |
+| `02_social_experiments.py` | `results/social/FINAL_social_*` **and** `results/clinical/FINAL_clinical_*` — despite the name it runs both the social ablations and the complete-case clinical baseline, because the two share the fold generator |
 | `03_clinical_experiments.py` | `results/clinical/FINAL2_*` (operating points, OOB thresholds) |
 | `04_clinical_model_search.py` | `results/clinical/IMPROVE_*` (model class, cohort spectrum) |
 | `05_clinical_ablations.py` | `results/clinical/IMPROVE2_*` (ratios, calibration, deep ensemble) |
 | `06_shap_analysis.py` | SHAP ranking, permutation importance, SHAP figures |
 | `07_error_analysis.py` | `results/social/FINAL_error_analysis.json` |
-| `08`–`11` (figure scripts) | `results/figures/*.png` |
+| `08_social_vocab_sweep.py` | `results/social/social_vocab_sweep.json` (vocabulary-cap sweep; five folds) |
+| `09_figures_main.py`, `10_figures_clinical.py` | seven of the nine result figures in `results/figures/` (the two SHAP figures come from `06`) |
+| `11_figure_architecture.py`, `12_figures_workflows.py` | matplotlib drafts of the three schematic figures — **see the note below** |
 
 ## Reproducing
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-# place the two source files as described in data/README.md
-cd src
-python 01_preprocess.py          # ~4 min
-python 02_social_experiments.py  # ~20 min on 2 CPU cores
-python 03_clinical_experiments.py
-python 04_clinical_model_search.py
-python 05_clinical_ablations.py
-python 06_shap_analysis.py
-python 07_error_analysis.py
-for f in 08_figures_main 09_figures_clinical 10_figure_architecture 11_figures_workflows; do python $f.py; done
+# place the two source files in data/ as described in data/README.md
+python src/01_preprocess.py           # ~4 min
+python src/02_social_experiments.py   # ~20 min on 2 CPU cores
+python src/03_clinical_experiments.py
+python src/04_clinical_model_search.py
+python src/05_clinical_ablations.py
+python src/06_shap_analysis.py
+python src/07_error_analysis.py
+python src/08_social_vocab_sweep.py   # ~6 min on 2 CPU cores
+python src/09_figures_main.py
+python src/10_figures_clinical.py
 ```
 
-All seeds are fixed (`random_state=0` for splits, `42` for forests). The scripts
-expect the data files in the working directory; adjust the paths at the top of
-`01_preprocess.py` if you keep them in `data/`.
+Every script `chdir`s to the repository root before doing anything, so it can be
+launched from any directory; all paths in this README are root-relative. The two
+data files belong in `data/` under the names given in `data/README.md`.
+
+All seeds are fixed (`random_state=0` for splits, `42` for forests). TensorFlow
+is not bit-deterministic on CPU across thread counts, so re-running the neural
+configurations reproduces the reported means to within a few thousandths rather
+than exactly. The Random Forest, TF-IDF and gradient-boosting results are exact.
+On the reference environment in `requirements.txt`, `08_social_vocab_sweep.py`
+reproduces its committed JSON exactly.
+
+### The three schematic figures
+
+`11_figure_architecture.py` and `12_figures_workflows.py` are **not** part of the
+pipeline above and are deliberately left out of it. They generate matplotlib
+drafts of the two workflow diagrams and the architecture diagram; the versions
+published in the paper, and committed here as `fig_workflow_text.png`,
+`fig_workflow_clinical.png` and `fig_architecture.png`, were redrawn by hand from
+those drafts. Running the two scripts overwrites the committed images with the
+drafts. They are kept because they are the authoritative record of the layer
+dimensions and the data path each diagram depicts.
+
+### Reading the result files
+
+`FINAL_social_summary.csv` and `FINAL_clinical_summary.csv` are pandas
+`MultiIndex` dumps and need their index and header levels declared:
+
+```python
+soc  = pd.read_csv("results/social/FINAL_social_summary.csv",     header=[0,1], index_col=0)
+clin = pd.read_csv("results/clinical/FINAL_clinical_summary.csv", header=[0,1], index_col=[0,1,2])
+```
+
+The `cm` column of `FINAL2_clinical_cc.csv` holds `[TN, FP, FN, TP]` averaged over
+the ten folds, which is why the entries are not integers; it is stored as a NumPy
+repr string. Per-fold values, unaveraged, are in `FINAL_*_folds.csv` and
+`FINAL_*_cms.json`.
 
 ### Note on NLTK
 
