@@ -119,7 +119,7 @@ data/       access instructions only - no raw data (see data/README.md)
 | `05_clinical_ablations.py` | `results/clinical/IMPROVE2_*` (ratios, calibration, deep ensemble) |
 | `06_shap_analysis.py` | SHAP ranking, permutation importance, SHAP figures |
 | `07_error_analysis.py` | `results/social/FINAL_error_analysis.json` |
-| `08_figures_main.py`, `09_figures_clinical.py`, `10_figure_architecture.py` | `results/figures/*.png` |
+| `08`–`11` (figure scripts) | `results/figures/*.png` |
 
 ## Reproducing
 
@@ -135,7 +135,7 @@ python 04_clinical_model_search.py
 python 05_clinical_ablations.py
 python 06_shap_analysis.py
 python 07_error_analysis.py
-python 08_figures_main.py && python 09_figures_clinical.py && python 10_figure_architecture.py
+for f in 08_figures_main 09_figures_clinical 10_figure_architecture 11_figures_workflows; do python $f.py; done
 ```
 
 All seeds are fixed (`random_state=0` for splits, `42` for forests). The scripts
