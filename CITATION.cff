@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code, please cite the associated article."
-title: "An Explainable CNN-BiLSTM-Random Forest Framework for Epidemic Warning-Signal and Disease-Status Classification"
+title: "An explainable CNN-BiLSTM-Random Forest framework for epidemic warning-signal and disease-status classification"
 authors:
   - family-names: Muhammed
     given-names: Faruk Obansa
@@ -20,3 +20,32 @@ authors:
     affiliation: "Nile University of Nigeria"
 license: MIT
 repository-code: "https://github.com/xacking/epidemic-warning-classification"
+preferred-citation:
+  type: article
+  title: "An explainable CNN-BiLSTM-Random Forest framework for epidemic warning-signal and disease-status classification"
+  authors:
+    - family-names: Muhammed
+      given-names: Faruk Obansa
+      orcid: "https://orcid.org/0009-0004-1763-0030"
+      affiliation: "Nile University of Nigeria"
+    - family-names: Suleiman
+      given-names: Muhammad Aliyu
+      orcid: "https://orcid.org/0000-0003-0465-8689"
+      affiliation: "Nile University of Nigeria"
+    - family-names: Abdullahi
+      given-names: Saleh El-Yakub
+      orcid: "https://orcid.org/0000-0003-2974-7098"
+      affiliation: "Nile University of Nigeria"
+    - family-names: Ogar
+      given-names: Austin Olom
+      orcid: "https://orcid.org/0009-0005-5726-0721"
+      affiliation: "Nile University of Nigeria"
+  journal: "Journal of the Nigerian Society of Physical Sciences"
+  volume: 8
+  issue: 4
+  start: 3606
+  year: 2026
+  month: 9
+  doi: "10.46481/jnsps.2026.3606"
+  url: "https://doi.org/10.46481/jnsps.2026.3606"
+  issn: "2714-4704"

@@ -3,9 +3,10 @@
 Code and derived results for:
 
 > F. O. Muhammed, M. A. Suleiman, S. E. Abdullahi & A. O. Ogar,
-> **"An Explainable CNN–BiLSTM–Random Forest Framework for Epidemic
-> Warning-Signal and Disease-Status Classification"**,
-> submitted to the *Journal of the Nigerian Society of Physical Sciences*.
+> **"An explainable CNN–BiLSTM–Random Forest framework for epidemic
+> warning-signal and disease-status classification"**,
+> *Journal of the Nigerian Society of Physical Sciences* **8** (2026) 3606.
+> <https://doi.org/10.46481/jnsps.2026.3606>
 
 A convolutional and bidirectional-recurrent feature extractor feeding a Random
 Forest classifier, applied under one architectural template to two independent
