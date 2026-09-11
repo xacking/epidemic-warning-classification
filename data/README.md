@@ -35,7 +35,10 @@ released on Kaggle and used by:
 > laboratory data using machine learning", *Procedia Computer Science* **239**
 > (2024) 675. https://doi.org/10.1016/j.procs.2024.06.223
 
-5,644 rows, 111 columns. Laboratory values are released already standardised to
+5,644 rows and 111 columns: a patient identifier, the target (`SARS-Cov-2 exam
+result`), and 109 candidate predictors. Seven of the 109 are uniformly empty or
+uniformly zero and are dropped by `src/01_preprocess.py`, leaving the 102
+predictors used throughout. Laboratory values are released already standardised to
 zero mean and unit variance. Cite the original source rather than re-hosting.
 
 ### Two cohorts
@@ -44,7 +47,7 @@ Both are constructed by `src/01_preprocess.py` and the experiment scripts:
 
 | Cohort | Records | Predictors | Positive | Prevalence |
 |---|---|---|---|---|
-| Full, median-imputed | 5,644 | 102 (69 numeric) | 558 | 9.9% |
+| Full, median-imputed | 5,644 | 102 (67 numeric, 35 categorical) | 558 | 9.9% |
 | Complete-case | 598 | 18 | 81 | 13.5% |
 
 The complete-case cohort keeps variables recorded for at least 10% of patients,
